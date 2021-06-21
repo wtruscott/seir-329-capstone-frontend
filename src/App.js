@@ -1,15 +1,106 @@
 import './App.css';
-import {Route} from "react-router-dom"
+import { Route, Switch } from "react-router-dom"
 import React from "react"
 import Login from "./pages/Login"
 import Things from "./pages/Things"
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Register from "./pages/Register";
+import Logout from "./components/Logout";
+import Create from './components/Create';
+import Edit from './components/Edit';
+import Delete from './components/Delete';
+import SingleThing from './pages/SingleThing'
+import SinglePlace from './pages/SinglePlace'
+import SingleContainer from './pages/SingleContainer'
+import SingleCollection from './pages/SingleCollection'
+import Search from './pages/Search'
+import HomePage from './pages/HomePage'
+import House from './pages/House'
+import Collections from './pages/Collections'
+import Storage from './pages/Storage'
+import Moving from './pages/Moving'
 
 
 function App(props) {
 
-  const [token, setToken] = React.useState({})
+  // const [token, setToken] = React.useState({})
 
   const URL = "https://seir-329-capstone.herokuapp.com/"
+
+  // const [things, setThings] = React.useState([])
+
+  // const emptyThing = {
+  //   name: "",
+  //   description: "",
+  //   location: "",
+  //   Owner: "",
+  //   slug: "",
+  //   favorite: False,
+  // }
+
+  // const [selectedThing, setSelectedThing] = React.useState(emptyThing)
+
+  // const getThings = () => {
+  // fetch(URL + "/things/")
+  // .then((response) => response.json())
+  // .then((data) => {
+  //   setThings(data)
+  // })
+  // }
+  
+  // React.useEffect(() => {
+    
+  //   getCharacters()
+  // }, [])
+
+  // const handleCreate = (newThing) => {
+  //   fetch(URL + "/characters/", {
+  //     method: "POST",
+  //     headers: {
+  //       Authorization: localStorage.getItem('access_token')
+  //       ? 'JWT ' + localStorage.getItem('access_token')
+  //       : null,
+  //       "Content-Type": "application/json",
+  //       accept: 'application/json',
+  //     },
+  //     body: JSON.stringify(newThing)
+  //   })
+  //   .then(() => getThings())
+  //   }
+
+  //   const handleUpdate = (thing) => {
+  //     fetch(URL + "/things/" + thing.slug, {
+  //       method: "PUT",
+  //       headers: {
+  //         Authorization: localStorage.getItem('access_token')
+  //         ? 'JWT ' + localStorage.getItem('access_token')
+  //         : null,
+  //         "Content-Type": "application/json",
+  //         accept: 'application/json',
+  //       },
+  //       body: JSON.stringify(thing)
+  //     })
+  //     .then(() => getThings())
+  //     }
+
+  //     const selectCharacter = (character) => {
+  //       setSelectedCharacter(character)
+  //       }
+
+  //       const deleteThing = (thing) => {
+  //         fetch(URL + "/things/" + thing.slug, {
+  //           method: "delete",
+  //           headers: {
+  //             Authorization: localStorage.getItem('access_token')
+  //             ? 'JWT ' + localStorage.getItem('access_token')
+  //             : null
+  //         }
+  //       })
+  //       .then(() => {
+  //         getThings()
+  //       })
+  //       }
 
   // const getToken = async (un, pw) => {
   //   const response = await fetch(URL + "api/token/", {
@@ -44,11 +135,60 @@ function App(props) {
 
   return (
     <div className="App">
-      <h1>WhereHouse</h1>
+      <Header/>
+      <Switch>
 
       {/* <Route exact path="/" render={(rp) => <Login {...rp}/>}/> */}
 
-      <Route exact path="/" render={(rp) => <Things URL={URL} {...rp}/>}/>
+      <Route exact path="/">
+        <HomePage/>
+      </Route>
+      <Route
+        exact path="/things" 
+        render={(rp) => <Things URL={URL} {...rp}/>}
+        />
+       <Route
+        path="/house" 
+        render={(rp) => <House URL={URL} {...rp}/>}
+        />
+      <Route
+        exact path="/collections" 
+        render={(rp) => <Collections URL={URL} {...rp}/>}
+        />
+       <Route
+        path="/storage" 
+        render={(rp) => <Storage URL={URL} {...rp}/>}
+        />
+       <Route
+        path="/moving" 
+        render={(rp) => <Moving URL={URL} {...rp}/>}
+        />
+      
+      <Route exact path="/admin/create" component={Create}/>
+        {/* <Route exact path="/edit:id" component={Edit}/>
+        <Route exact path="/delete:id" component={Delete}/> */}
+        <Route path="/register"> <Register/> </Route> 
+        <Route path="/login"> <Login/> </Route>
+        <Route path="/logout"> <Logout/> </Route>
+        <Route path="/search"> <Search/> </Route>
+        <Route
+        path="/things/:slug"
+        render={(rp) => <SingleThing {...rp}/>}
+        />
+        <Route
+        path="/places/:slug"
+        render={(rp) => <SinglePlace {...rp}/>}
+        />
+        <Route
+        path="/containers/:slug"
+        render={(rp) => <SingleContainer {...rp}/>}
+        />
+        <Route
+        path="/collections/:slug"
+        render={(rp) => <SingleCollection {...rp}/>}
+        />
+        </Switch>
+        <Footer/>
     </div>
   );
 }
