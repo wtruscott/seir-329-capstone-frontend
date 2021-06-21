@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 import { Link, useHistory } from "react-router-dom";
-import SearchIcon from '@material-ui/icons/Search';
-import InputBase from '@material-ui/core/Inputbase'
 
 function Header() {
     let history = useHistory();
@@ -17,13 +15,6 @@ function Header() {
 
     return (
         <div className= "NavBar">
-            <SearchIcon/>
-            <InputBase
-                placeholder="Search..."
-                value={data.search}
-                onChange={(newValue) => setData({ search: newValue })}
-                onRequestSearch={()=> goSearch(data.search)}
-            />
              <Link to="/">
                 Home
             </Link>
