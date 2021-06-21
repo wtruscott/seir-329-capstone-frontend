@@ -1,0 +1,51 @@
+.banner {
+    height: 30px;
+    padding-top: 4em;
+    padding-bottom: 4em;
+    background-color: rgb(255, 248, 235);
+}
+
+.foursquare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    justify-items: center;
+    grid-gap: 5vw;
+    background-color: rgb(255, 248, 235);
+
+    div {
+        height: 45vw;
+        width: 45vw;
+        border-radius: 20px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.8);
+    }
+    a {
+        text-decoration: none;
+        color: black;
+        }
+}
+
+#houseSquare {
+    background-color: rgb(232, 205, 170);
+}
+
+#storageSquare {
+    background-color: darkblue;
+}
+
+#movingSquare {
+    background-color: rgb(125, 244, 244);
+}
+
+#collectionSquare {
+    background-color: rgb(239, 152, 143);
+}
+
+.square {
+    a {
+    text-decoration: none;
+    }
+}
+
+
+

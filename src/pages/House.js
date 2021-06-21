@@ -14,12 +14,14 @@ useEffect(() => {
 }, [setData]);
 
 return (
-        <>
-        <h1>My House</h1>
-        <ul>
-        {data.places && data.places.length > 0 ? data.places.map((place => <Link to={'places/' + place.slug}>{place.name}</Link>)) : null}
-        </ul>
-        </>
+        <div className="content">
+                <div className="banner">
+                        <h1>My House</h1>
+                </div>
+                <ul className="placeList">
+                {data.places && data.places.length > 0 ? data.places.map((place => <Link to={'places/' + place.slug}>{place.name}</Link>)) : null}
+                </ul>
+        </div>
 )
   
 }

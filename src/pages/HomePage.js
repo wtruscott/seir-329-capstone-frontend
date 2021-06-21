@@ -4,21 +4,32 @@ import { Link } from 'react-router-dom'
 const Homepage = () => {
 
 return (
-    <div>
-        <h1>This is the HomePage</h1>
-
-        <Link to="/house">
-            My House
-        </Link>
-        <Link to="/storage">
-            My Storage
-        </Link>
-        <Link to="/moving">
-            Moving
-        </Link>
-        <Link to="/collections">
-            Collections
-        </Link>
+    <div className="content">
+        <div className="banner">
+            <h1>Let's Get Organized</h1>
+        </div>
+        <div className="foursquare">
+            <Link to="/house">
+                <div className="sqaure" id="houseSquare">
+                    My House
+                </div>
+            </Link>
+            <Link to="/storage">
+            <div className="sqaure" id="storageSquare">
+                    My Storage
+                </div>
+            </Link>
+            <Link to="/moving">
+            <div className="sqaure" id="movingSquare">
+                    Moving Time
+                </div>
+            </Link>
+            <Link to="/collections">
+            <div className="sqaure" id="collectionSquare">
+                    My Collections
+                </div>
+            </Link>
+        </div>
     </div>
 )
   

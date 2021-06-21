@@ -16,11 +16,12 @@ const SinglePlace = () => {
     }, [setData]);
         
 return (
-    <>
-        <h1>Here's a Place</h1>
+    <div className="content">
+    <div className="banner">
         <h1>{data.places.name}</h1>
+    </div>
         <h2>{data.places.things}</h2>
-    </>
+    </div>
 
 )
   

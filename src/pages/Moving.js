@@ -14,12 +14,14 @@ const Moving = () => {
     }, [setData]);
 
 return (
-    <>
-    <h1>Moving</h1>
-    <ul>
+    <div className="content">
+        <div className="banner">
+            <h1>Moving</h1>
+        </div>
+    <ul className="movingList">
     {data.containers && data.containers.length > 0 ? data.containers.map((container => <Link to={'containers/' + container.slug}>{container.name}</Link>)) : null}
     </ul>
-    </>
+    </div>
 )
   
 }

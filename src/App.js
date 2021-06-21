@@ -1,4 +1,5 @@
 import './App.css';
+import './style/style.scss'
 import { Route, Switch } from "react-router-dom"
 import React from "react"
 import Login from "./pages/Login"
@@ -36,7 +37,7 @@ function App(props) {
   //   location: "",
   //   Owner: "",
   //   slug: "",
-  //   favorite: False,
+  //   favorite: ""
   // }
 
   // const [selectedThing, setSelectedThing] = React.useState(emptyThing)
@@ -51,7 +52,7 @@ function App(props) {
   
   // React.useEffect(() => {
     
-  //   getCharacters()
+  //   getThingss()
   // }, [])
 
   // const handleCreate = (newThing) => {

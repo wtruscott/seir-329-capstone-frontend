@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import axiosInstance from '../axios';
-import {Link} from "react-router-dom"
+import {Link} from "react-router-dom";
+import CollectionCard from '../components/CollectionCard'
 
 const Collections = () => {
 
@@ -14,12 +15,14 @@ const Collections = () => {
     }, [setData]);
 
 return (
-    <>
-    <h1>My Collections</h1>
-    <ul>
-    {data.collections && data.collections.length > 0 ? data.collections.map((collection => <Link to={'collections/' + collection.slug}>{collection.name}</Link>)) : null}
+    <div className="content">
+    <div className="banner">
+        <h1>My Collections</h1>
+    </div>
+    <ul className="collectionGrid">
+    {data.collections && data.collections.length > 0 ? data.collections.map((collection => <Link to={'collections/' + collection.slug}><CollectionCard name={collection.name}/></Link>)) : null}
     </ul>
-    </>
+    </div>
 )
   
 }

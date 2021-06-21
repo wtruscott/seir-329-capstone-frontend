@@ -14,12 +14,14 @@ const Storage = (props) => {
     }, [setData]);
 
 return (
-    <>
-    <h1>Storage</h1>
-    <ul>
-    {data.containers && data.containers.length > 0 ? data.containers.map((container => <Link to={'containers/' + container.slug}>{container.name}</Link>)) : null}
+    <div className="content">
+        <div className="banner">
+            <h1>Storage</h1>
+        </div>
+    <ul className="containerList">
+        {data.containers && data.containers.length > 0 ? data.containers.map((container => <Link to={'containers/' + container.slug}>{container.name}</Link>)) : null}
     </ul>
-    </>
+    </div>
 )
   
 }

@@ -16,11 +16,13 @@ const SingleContainer = () => {
     }, [setData]);
 
 return (
-    <>
-    <h1>Here's a Container</h1>
+    <div className="content">
+        <div className="banner">
+            <h1>Here's a Container</h1>
+        </div>
     <h1>{data.containers.name}</h1>
     <h2>{data.containers.things}</h2>
-</>
+    </div>
 )
   
 }
