@@ -30,7 +30,7 @@ export default function SignUp() {
                 email: formData.email,
             })
             .then((res) => {
-                history.push('/login');
+                history.push('/');
                 console.log(res);
                 console.log(res.data);
             });

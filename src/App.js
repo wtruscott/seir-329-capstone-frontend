@@ -104,7 +104,7 @@ function App(props) {
     <div className="App">
       <Header/>
       <Switch>
-      <Route exact path="/">
+      <Route path="/home">
         <HomePage/>
       </Route>
       <Route
@@ -157,7 +157,7 @@ function App(props) {
         />
       
         <Route path="/register"> <Register/> </Route> 
-        <Route path="/login"> <Login/> </Route>
+        <Route exact path="/"> <Login/> </Route>
         <Route path="/logout"> <Logout/> </Route>
         <Route
         path="/things/:slug"

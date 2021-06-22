@@ -5,13 +5,13 @@ const Header = () => {
 
     return (
         <div className= "NavBar">
-             <Link to="/">
+             <Link to="/home">
                 Home
             </Link>
             <Link to="/things">
                 Things
             </Link>
-            <Link to="/login">
+            <Link to="/">
                 Login
             </Link>
             <Link to="/logout">
