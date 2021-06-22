@@ -12,7 +12,7 @@ const Homepage = () => {
 return (
     <div className="content">
         <div className="banner">
-            <h1>Let's Get Organized</h1>
+            <h1>Welcome to WhereHouse, Let's Get Organized</h1>
         </div>
         <div className="foursquare">
             <Link to="/house">
