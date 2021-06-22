@@ -9,13 +9,11 @@ import Footer from "./components/Footer";
 import Register from "./pages/Register";
 import Logout from "./components/Logout";
 import Create from './components/Create';
-import Edit from './components/Edit';
 import SearchResults from './pages/SearchResults';
 import SingleThing from './pages/SingleThing'
 import SinglePlace from './pages/SinglePlace'
 import SingleContainer from './pages/SingleContainer'
 import SingleCollection from './pages/SingleCollection'
-import Search from './pages/Search'
 import HomePage from './pages/HomePage'
 import House from './pages/House'
 import Collections from './pages/Collections'
@@ -24,8 +22,6 @@ import Moving from './pages/Moving'
 
 
 function App(props) {
-
-  // const [token, setToken] = React.useState({})
 
   const URL = "https://seir-329-capstone.herokuapp.com/"
 
@@ -102,44 +98,12 @@ function App(props) {
         })
         }
 
-  // const getToken = async (un, pw) => {
-  //   const response = await fetch(URL + "api/token/", {
-  //     method: "post",
-  //     headers: {
-  //       "Content-Type": "application/json"
-  //     },
-  //     body: JSON.stringify({username: un, password: pw})
-  //   })
-  //   const data = await response.json()
-  //   console.log(data)
-  //   setToken(data)
-  //   localStorage.setItem("token", JSON.stringify(data))
-  // }
-
-  // React.useEffect(() => {
-  //   const possibleToken = JSON.parse(localStorage.getItem("token"))
-  //   if (possibleToken){
-  //     setToken(possibleToken)
-  //     console.log(possibleToken)
-  //   }
-  // }, [])
-
-  // React.useEffect(() => {
-
-  //   if(token.access){
-  //     props.history.push("/things")
-  //   } else {
-  //     props.history.push("/")
-  //   }
-  // }, [token.access])
+  
 
   return (
     <div className="App">
       <Header/>
       <Switch>
-
-      {/* <Route exact path="/" render={(rp) => <Login {...rp}/>}/> */}
-
       <Route exact path="/">
         <HomePage/>
       </Route>
@@ -195,7 +159,6 @@ function App(props) {
         <Route path="/register"> <Register/> </Route> 
         <Route path="/login"> <Login/> </Route>
         <Route path="/logout"> <Logout/> </Route>
-        <Route path="/search"> <Search/> </Route>
         <Route
         path="/things/:slug"
         render={(rp) => <SingleThing things={things} selectThing={selectThing} deleteThing={deleteThing} {...rp}/>}

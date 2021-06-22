@@ -4,4 +4,10 @@
     grid-template-rows: 1fr;
     grid-gap: 4vw;
     justify-items: space-around;
+
+    a {
+        text-decoration: none;
+        font-size: 2em;
+        color: black;
+    }
 }

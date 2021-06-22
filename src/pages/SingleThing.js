@@ -18,12 +18,11 @@ export default function SingleThing(props) {
     return (
         <div className="content">
             <div className="banner">
-                <h1>Here's a thing</h1>
-            </div>
             <h1>{data.things.name}</h1>
+            </div>
             <h2>{data.things.description}</h2>
-            <h2>{data.things.location}</h2>
-            <h2>{data.things.owner}</h2>
+            <h2>Location: {data.things.location}</h2>
+            <h2>Owned by: {data.things.owner}</h2>
             <button onClick={() => {
             props.selectThing(data.things)
             props.history.push("/edit-thing")

@@ -1,29 +1,3 @@
-// import React from "react"
-
-// const Login = (props) => {
-
-//     const username = React.useRef(null)
-//     const password = React.useRef(null)
-
-//     const handleLogin = (event) => {
-//         const un = username.current.value
-//         const pw = password.current.value
-
-//         props.getToken(un, pw)
-
-//         username.current.value = ""
-//         password.current.value = ""
-//     }
-
-//     return <div>
-//         <input type="text" name="username" ref={username}/>
-//         <input type="password" name="password" ref={password}/>
-//         <button onClick={handleLogin}>Login</button>
-//     </div>
-// }
-
-// export default Login
-
 import React, {useState} from 'react'
 import axiosInstance from '../axios'
 import { useHistory } from 'react-router-dom'
@@ -59,8 +33,6 @@ export default function SignUp() {
                 axiosInstance.defaults.headers['Authorization'] =
                     'JWT' + localStorage.getItem('access_token');
                 history.push('/');
-                // console.log(res);
-                // console.log(res.data);
             });
     }
 
