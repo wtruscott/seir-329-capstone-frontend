@@ -37,11 +37,12 @@ export default function SignUp() {
     }
 
     return (
-        <div>
-            <form>
+        <div className="content">
+            <form className="banner">
                 <input 
                     type="text" 
-                    name="username" 
+                    name="username"
+                    placeholder="username" 
                     label="username"
                     id="username"
                     autoComplete="current-username"
@@ -51,6 +52,7 @@ export default function SignUp() {
                     type="password" 
                     name="password" 
                     label="password"
+                    placeholder="password"
                     id="password"
                     autoComplete="current-password"
                     onChange={handleChange}
@@ -59,6 +61,7 @@ export default function SignUp() {
                     type="email" 
                     name="email" 
                     label="email"
+                    placeholder="email"
                     id="email"
                     autoComplete="current-email"
                     onChange={handleChange}

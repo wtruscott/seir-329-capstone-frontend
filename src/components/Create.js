@@ -17,6 +17,7 @@ useEffect(() => {
 const handleSubmit = (event) => {
     event.preventDefault()
     props.handleSubmit(formData)
+    props.history.push('/things')
 }
 
 const handleChange = (event) => {

@@ -10,7 +10,7 @@ import Register from "./pages/Register";
 import Logout from "./components/Logout";
 import Create from './components/Create';
 import Edit from './components/Edit';
-import Delete from './components/Delete';
+import SearchResults from './pages/SearchResults';
 import SingleThing from './pages/SingleThing'
 import SinglePlace from './pages/SinglePlace'
 import SingleContainer from './pages/SingleContainer'
@@ -146,6 +146,10 @@ function App(props) {
       <Route
         exact path="/things" 
         render={(rp) => <Things URL={URL} {...rp}/>}
+        />
+        <Route
+        exact path="/search" 
+        render={(rp) => <SearchResults URL={URL} {...rp}/>}
         />
        <Route
           path="/add-thing"

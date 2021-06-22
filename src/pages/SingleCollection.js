@@ -17,11 +17,13 @@ const SingleCollection = () => {
 
 
 return (
-    <>
-    <h1>Here's a Collection</h1>
-    <h1>{data.collections.name}</h1>
-    <h2>{data.collections.things}</h2>
-</>
+    <div className="content">
+        <div className="banner">
+            <h1>Here's a Collection</h1>
+        </div>
+        <h1>{data.collections.name}</h1>
+        <h2>{data.collections.things}</h2>
+    </div>
 )
   
 }

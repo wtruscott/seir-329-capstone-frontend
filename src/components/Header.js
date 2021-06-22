@@ -1,17 +1,7 @@
 import React, { useState } from 'react'
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-function Header() {
-    let history = useHistory();
-    const [data, setData] = useState({ search: '' })
-
-    const goSearch = (e) => {
-        history.pushState({
-            pathname: 'api/search/',
-            search: '?search=' + data.search,
-        });
-        window.location.reload();
-    }
+const Header = () => {
 
     return (
         <div className= "NavBar">
@@ -29,6 +19,9 @@ function Header() {
             </Link>
             <Link to="/register">
                 Register
+            </Link>
+            <Link to='/search'>
+                Look for a Thing!
             </Link>
         </div>
     )
