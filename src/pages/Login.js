@@ -65,7 +65,7 @@ export default function SignUp() {
     }
 
     return (
-        <div>
+        <div className="banner">
             <form>
                 <input 
                     type="text" 

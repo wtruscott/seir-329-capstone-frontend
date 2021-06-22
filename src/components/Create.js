@@ -1,105 +1,101 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axiosInstance from '../axios';
 import { useHistory } from 'react-router-dom';
 
-export default function Create() {
-	function slugify(string) {
-		const a =
-			'àáâäæãåāăąçćčđďèéêëēėęěğǵḧîïíīįìłḿñńǹňôöòóœøōõőṕŕřßśšşșťțûüùúūǘůűųẃẍÿýžźż·/_,:;';
-		const b =
-			'aaaaaaaaaacccddeeeeeeeegghiiiiiilmnnnnoooooooooprrsssssttuuuuuuuuuwxyyzzz------';
-		const p = new RegExp(a.split('').join('|'), 'g');
+const Create = (props) => {
 
-		return string
-			.toString()
-			.toLowerCase()
-			.replace(/\s+/g, '-')
-			.replace(p, (c) => b.charAt(a.indexOf(c)))
-			.replace(/&/g, '-and-')
-			.replace(/[^\w\-]+/g, '') 
-			.replace(/\-\-+/g, '-') 
-			.replace(/^-+/, '') 
-			.replace(/-+$/, ''); 
-	}
+const [formData, setFormData] = useState(props.thing)
 
-	const history = useHistory();
-	const initialFormData = Object.freeze({
-		name: '',
-		slug: '',
-		location: '',
-		descripertion: '',
-	});
+const [newThing, setNewThing] = useState(null)
 
-	const [formData, updateFormData] = useState(initialFormData);
+useEffect(() => {
+    fetch(props.URL + "things/")
+    .then((response) => response.json())
+    .then((data) => setNewThing(data))
+}, [])
 
-	const handleChange = (e) => {
-		if ([e.target.name] == 'title') {
-			updateFormData({
-				...formData,
-				[e.target.name]: e.target.value.trim(),
-				['slug']: slugify(e.target.value.trim()),
-			});
-		} else {
-			updateFormData({
-				...formData,
-				[e.target.name]: e.target.value.trim(),
-			});
-		}
-	};
-
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		axiosInstance
-			.post(`admin/create/`, {
-				name: formData.name,
-				slug: formData.slug,
-				owner: 1,
-				location: formData.location,
-				description: formData.description,
-			})
-			.then((res) => {
-				history.push('/admin/');
-			});
-	};
-
-
-	return (
-		<div>
-            <h1>Create New Post</h1>
-				<form>
-					<input
-								
-								label="Thing Name"
-								name="name"
-								autoComplete="name"
-								onChange={handleChange}
-							/>
-						<input
-								label="Thing Location"
-								name="location"
-								autoComplete="location"
-								onChange={handleChange}
-							/>
-						<input
-								label="slug"
-								name="slug"
-								autoComplete="slug"
-								value={formData.slug}
-								onChange={handleChange}
-							/>
-						<input
-								label="Thing Description"
-								name="description"
-								autoComplete="description"
-								onChange={handleChange}
-							/>
-					<button
-						type="submit"
-						onClick={handleSubmit}
-					>
-						Add Thing
-					</button>
-				</form>
-			</div>
-	);
+const handleSubmit = (event) => {
+    event.preventDefault()
+    props.handleSubmit(formData)
 }
+
+const handleChange = (event) => {
+    setFormData({ ...formData, [event.target.name]: event.target.value })
+  }
+
+const loading = () => {
+    return (
+    <div className="content">
+        <h1 className="banner">Making a Thing!</h1>
+    </div>
+    )
+}
+
+const loaded = () => {
+    return (
+        <div className="content">
+        <div className="thingForm">
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="name">What do you call this Thing? </label> <br/>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              value={formData.name}
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <label htmlFor="location">Where do you keep this thing? </label><br/>
+            <input
+              type="text"
+              name="location"
+              id="location"
+              value={formData.location}
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <label htmlFor="description">Tell us about this thing. </label> <br/>
+            <input
+              type="text"
+              name="description"
+              id="description"
+              value={formData.description}
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <label htmlFor="owner">type your username!</label><br/>
+            <input
+              type="text"
+              name="owner"
+              id="owner"
+              value={formData.owner}
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <label htmlFor="slug">slug</label><br/>
+            <input
+              type="text"
+              name="slug"
+              id="slug"
+              value={formData.slug}
+              onChange={handleChange}
+            />
+          </div>
+          <input type="submit" value={props.label} id="addAThing" /> 
+        </form>
+        </div>
+        </div>
+      )
+}
+
+return newThing ? loaded() : loading()
+
+
+}
+
+export default Create

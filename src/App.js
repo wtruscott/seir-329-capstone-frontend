@@ -1,7 +1,7 @@
 import './App.css';
 import './style/style.scss'
 import { Route, Switch } from "react-router-dom"
-import React from "react"
+import React, { useState, useEffect } from "react"
 import Login from "./pages/Login"
 import Things from "./pages/Things"
 import Header from "./components/Header";
@@ -29,79 +29,78 @@ function App(props) {
 
   const URL = "https://seir-329-capstone.herokuapp.com/"
 
-  // const [things, setThings] = React.useState([])
+  const [things, setThings] = useState([])
 
-  // const emptyThing = {
-  //   name: "",
-  //   description: "",
-  //   location: "",
-  //   Owner: "",
-  //   slug: "",
-  //   favorite: ""
-  // }
+  const emptyThing = {
+    name: "",
+    description: "",
+    location: "",
+    owner: "",
+    slug: "",
+    favorite: false
+  }
 
-  // const [selectedThing, setSelectedThing] = React.useState(emptyThing)
+  const [selectedThing, setSelectedThing] = useState(emptyThing)
 
-  // const getThings = () => {
-  // fetch(URL + "/things/")
-  // .then((response) => response.json())
-  // .then((data) => {
-  //   setThings(data)
-  // })
-  // }
+  const getThings = () => {
+    fetch(URL + "things/")
+      .then((response) => response.json())
+      .then((data) => {
+        setTimeout(setThings(data), 5000)
+      })
+    }
   
-  // React.useEffect(() => {
-    
-  //   getThingss()
-  // }, [])
+  useEffect(() => {
+    getThings()
+  }, [])
 
-  // const handleCreate = (newThing) => {
-  //   fetch(URL + "/characters/", {
-  //     method: "POST",
-  //     headers: {
-  //       Authorization: localStorage.getItem('access_token')
-  //       ? 'JWT ' + localStorage.getItem('access_token')
-  //       : null,
-  //       "Content-Type": "application/json",
-  //       accept: 'application/json',
-  //     },
-  //     body: JSON.stringify(newThing)
-  //   })
-  //   .then(() => getThings())
-  //   }
+  const handleCreate = (newThing) => {
+    fetch(URL + "things/", {
+      method: "POST",
+      headers: {
+        Authorization: localStorage.getItem('access_token')
+        ? 'JWT ' + localStorage.getItem('access_token')
+        : null,
+        "Content-Type": "application/json",
+        accept: 'application/json',
+      },
+      body: JSON.stringify(newThing)
+    })
+    .then(() => getThings())
+    }
 
-  //   const handleUpdate = (thing) => {
-  //     fetch(URL + "/things/" + thing.slug, {
-  //       method: "PUT",
-  //       headers: {
-  //         Authorization: localStorage.getItem('access_token')
-  //         ? 'JWT ' + localStorage.getItem('access_token')
-  //         : null,
-  //         "Content-Type": "application/json",
-  //         accept: 'application/json',
-  //       },
-  //       body: JSON.stringify(thing)
-  //     })
-  //     .then(() => getThings())
-  //     }
+    const handleUpdate = (thing) => {
+      console.log(URL + "things/" + thing.slug)
+      fetch(URL + "things/" + thing.slug + "/", {
+        method: "PUT",
+        headers: {
+          Authorization: localStorage.getItem('access_token')
+          ? 'JWT ' + localStorage.getItem('access_token')
+          : null,
+          "Content-Type": "application/json",
+          accept: 'application/json',
+        },
+        body: JSON.stringify(thing),
+      }).then(() => getThings())
+      }
 
-  //     const selectCharacter = (character) => {
-  //       setSelectedCharacter(character)
-  //       }
+    const selectThing = (thing) => {
+        setSelectedThing(thing)
+      }
 
-  //       const deleteThing = (thing) => {
-  //         fetch(URL + "/things/" + thing.slug, {
-  //           method: "delete",
-  //           headers: {
-  //             Authorization: localStorage.getItem('access_token')
-  //             ? 'JWT ' + localStorage.getItem('access_token')
-  //             : null
-  //         }
-  //       })
-  //       .then(() => {
-  //         getThings()
-  //       })
-  //       }
+        const deleteThing = (thing) => {
+          fetch(URL + "things/" + thing.slug + "/", {
+            method: "delete",
+            headers: {
+              Authorization: localStorage.getItem('access_token')
+              ? 'JWT ' + localStorage.getItem('access_token')
+              : null
+          }
+        })
+        .then(() => {
+          getThings()
+        })
+        }
 
   // const getToken = async (un, pw) => {
   //   const response = await fetch(URL + "api/token/", {
@@ -149,6 +148,30 @@ function App(props) {
         render={(rp) => <Things URL={URL} {...rp}/>}
         />
        <Route
+          path="/add-thing"
+          render={(routerProps) => (
+            <Create
+              {...routerProps}
+              label={"Add Thing"}
+              handleSubmit={handleCreate}
+              thing={emptyThing}
+              URL={URL}
+            />
+          )}
+        />
+        <Route
+          path="/edit-thing"
+          render={(routerProps) => (
+            <Create
+              {...routerProps}
+              label={"Edit Thing"}
+              handleSubmit={handleUpdate}
+              thing={selectedThing}
+              URL={URL}
+            />
+          )}
+        />
+       <Route
         path="/house" 
         render={(rp) => <House URL={URL} {...rp}/>}
         />
@@ -165,16 +188,13 @@ function App(props) {
         render={(rp) => <Moving URL={URL} {...rp}/>}
         />
       
-      <Route exact path="/admin/create" component={Create}/>
-        {/* <Route exact path="/edit:id" component={Edit}/>
-        <Route exact path="/delete:id" component={Delete}/> */}
         <Route path="/register"> <Register/> </Route> 
         <Route path="/login"> <Login/> </Route>
         <Route path="/logout"> <Logout/> </Route>
         <Route path="/search"> <Search/> </Route>
         <Route
         path="/things/:slug"
-        render={(rp) => <SingleThing {...rp}/>}
+        render={(rp) => <SingleThing things={things} selectThing={selectThing} deleteThing={deleteThing} {...rp}/>}
         />
         <Route
         path="/places/:slug"
